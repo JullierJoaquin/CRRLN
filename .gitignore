@@ -1,0 +1,34 @@
+# Entorno virtual
+venv/
+
+# Archivos de Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Archivos de configuración o entorno
+.env
+
+# Archivos de logs
+*.log
+
+# Archivos de base de datos temporales
+*.sqlite3
+
+# Archivos de exportación
+*.xlsx
+*.xls
+*.pdf
+
+# Configuración de IDEs
+.vscode/
+.idea/
+
+# Archivos de Streamlit
+.streamlit/
+
+# Archivos de paquetes
+*.egg-info/
+dist/
+build/

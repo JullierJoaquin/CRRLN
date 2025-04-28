@@ -13,7 +13,7 @@ def cargar_datos():
 
 datos = cargar_datos()
 
-st.title("🧱 Presupuestador de Obras – MVP")
+st.title("CRRLN")
 
 # Selección de ítems
 st.subheader("Seleccioná ítems del presupuesto")

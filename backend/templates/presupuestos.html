@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-[#202F3C] text-white flex flex-col p-5 space-y-6 min-h-screen">
+
+    <!-- Logo -->
+    <div class="flex justify-center mb-8">
+      <img src="/static/images/logo.png" alt="CRRLN Logo" class="w-48 h-auto">
+    </div>
+
+    <!-- Navegación principal -->
+    <nav class="flex flex-col space-y-4">
+      <a href="/" class="hover:underline">Inicio</a>
+      <a href="/presupuestos" class="hover:underline">Presupuestos</a>
+    </nav>
+
+    <!-- Navegación secundaria al pie -->
+    <div class="flex flex-col space-y-4 mt-auto">
+      <a href="#" class="hover:underline">Contacto</a>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- Main content -->
+  <main class="flex-1 p-10 flex flex-col space-y-6">
+
+    <!-- Contenedor dividido -->
+    <div class="flex space-x-6">
+
+      <!-- Sección Principal: Tabla (3/4) -->
+      <div class="flex-1 bg-white rounded-lg shadow p-6">
+        <table class="table-auto w-full text-center">
+          <thead class="bg-gray-200 text-gray-700">
+            <tr>
+              <th class="px-4 py-2">Material</th>
+              <th class="px-4 py-2">Unidad</th>
+              <th class="px-4 py-2">Precio Unitario</th>
+              <th class="px-4 py-2">Cantidad</th>
+              <th class="px-4 py-2">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Aquí las filas dinámicas de materiales -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Sección secundaria: Espacio adicional (1/4) -->
+      <div class="w-1/4 bg-gray-200 rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-4">Espacio adicional</h2>
+        <p class="text-gray-700">Aquí podés agregar herramientas, notas, promociones o atajos.</p>
+      </div>
+
+    </div>
+
+  </main>
+
+</body>
+</html>

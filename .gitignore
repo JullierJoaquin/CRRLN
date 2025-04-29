@@ -1,34 +1,40 @@
-# Entorno virtual
+# Entornos virtuales
 venv/
+.env
 
-# Archivos de Python
+# Archivos de base de datos locales
+*.db
+*.sqlite3
+
+# __pycache__ y archivos de compilación Python
 __pycache__/
-*.py[cod]
+*.pyc
 *.pyo
 *.pyd
 
-# Archivos de configuración o entorno
-.env
-
-# Archivos de logs
+# Archivos temporales
 *.log
+*.pot
+*.pyc
+*.swp
+.DS_Store
+Thumbs.db
 
-# Archivos de base de datos temporales
-*.sqlite3
-
-# Archivos de exportación
-*.xlsx
-*.xls
-*.pdf
-
-# Configuración de IDEs
+# Configuraciones del entorno de desarrollo
 .vscode/
 .idea/
+*.code-workspace
 
-# Archivos de Streamlit
-.streamlit/
+# Archivos de sistema
+.env.*
+*.bak
+*.tmp
 
-# Archivos de paquetes
-*.egg-info/
+# Otros
+.mypy_cache/
+.pytest_cache/
+coverage/
+htmlcov/
 dist/
 build/
+*.egg-info/

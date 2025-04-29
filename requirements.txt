@@ -1,5 +1,7 @@
 fastapi
 uvicorn
+jinja2
+python-multipart
 sqlalchemy
 psycopg2-binary
 pydantic
@@ -9,3 +11,6 @@ openpyxl
 xlsxwriter
 reportlab
 python-dotenv
+passlib[bcrypt]
+email-validator
+fastapi-users[sqlalchemy2]

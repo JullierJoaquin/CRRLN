@@ -12,7 +12,7 @@
 
     <!-- Logo -->
     <div class="flex justify-center mb-8">
-      <img src="/static/images/logo.png" alt="CRRLN Logo" class="w-48 h-auto">
+      <img src="/static/images/logo.png" alt="MTRL Logo" class="w-48 h-auto">
     </div>
 
     <!-- Navegación principal -->
@@ -36,20 +36,53 @@
     <div class="flex space-x-6">
 
       <!-- Sección Principal: Tabla (3/4) -->
-      <div class="flex-1 bg-white rounded-lg shadow p-6">
+      <div class="overflow-x-auto bg-white rounded-lg shadow p-6">
         <table class="table-auto w-full text-center">
-          <thead class="bg-gray-200 text-gray-700">
+          <thead class="bg-gray-200 text-gray-700 text-sm uppercase">
             <tr>
               <th class="px-4 py-2">Material</th>
               <th class="px-4 py-2">Unidad</th>
               <th class="px-4 py-2">Precio Unitario</th>
               <th class="px-4 py-2">Cantidad</th>
               <th class="px-4 py-2">Subtotal</th>
+              <th class="px-4 py-2">Acción</th>
             </tr>
           </thead>
-          <tbody>
-            <!-- Aquí las filas dinámicas de materiales -->
+      
+          <tbody id="tabla-materiales">
+            <!-- Filas se agregan dinámicamente -->
           </tbody>
+      
+          <tfoot>
+            <tr class="bg-gray-50 text-center">
+              <!-- Material -->
+              <td class="px-4 py-2">
+                <input id="nuevo-material" type="text" placeholder="Ej: Cemento"
+                  class="p-2 border rounded w-full text-center"
+                  onkeydown="if(event.key === 'Enter') agregarMaterial()">
+              </td>
+      
+              <!-- Unidad -->
+              <td class="px-4 py-2 unidad">-</td>
+      
+              <!-- Precio Unitario -->
+              <td class="px-4 py-2 precio">-</td>
+      
+              <!-- Cantidad -->
+              <td class="px-4 py-2">—</td>
+      
+              <!-- Subtotal -->
+              <td class="px-4 py-2">—</td>
+      
+              <!-- Botón de agregar -->
+              <td class="px-4 py-2">
+                <button onclick="agregarMaterial()"
+                  class="bg-[#FFB72D] hover:bg-yellow-400 text-white px-4 py-2 rounded shadow font-bold text-lg">
+                  +
+                </button>
+              </td>
+            </tr>
+          </tfoot>
         </table>
       </div>
 
@@ -63,5 +96,6 @@
 
   </main>
 
+<script src="/static/js/presupuestos.js"></script>
 </body>
 </html>

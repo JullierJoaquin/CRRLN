@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login con Firebase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+  <div class="bg-white p-8 rounded shadow-md w-full max-w-sm text-center">
+    <img src="/static/images/logo.png" alt="Logo" class="w-32 mx-auto mb-6">
+    <button id="login-btn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+      Iniciar sesión
+    </button>
+  </div>
+
+  <script>
+    // Configuración de Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDdhhOgNNR6g90tuLO5AhR3sL4S-d_OM0Q",
+      authDomain: "mtrl-fb9da.firebaseapp.com",
+      projectId: "mtrl-fb9da",
+      storageBucket: "mtrl-fb9da.appspot.com",
+      messagingSenderId: "866092445579",
+      appId: "1:866092445579:web:f2ef6ca33393978f6f498e",
+      measurementId: "G-MDLK1ECZPM"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    document.getElementById("login-btn").addEventListener("click", () => {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .then(result => {
+          return result.user.getIdToken();
+        })
+        .then(token => {
+          document.cookie = `firebase_token=${token}; path=/`;
+          window.location.href = "/presupuestos";
+        })
+        .catch(error => {
+          console.error("❌ Error al iniciar sesión:", error);
+          alert("Hubo un error al iniciar sesión.");
+        });
+    });
+  </script>
+</body>
+</html>

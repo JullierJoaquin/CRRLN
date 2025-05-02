@@ -1,125 +1,91 @@
-# 🏗️ CRRLN - Presupuestos de Obras Rápidos y Profesionales
+# MTRL 🔐📐
 
-CRRLN es una aplicación web pensada para facilitar la creación, gestión y exportación de presupuestos de obras de construcción en Argentina, con foco en la región del Litoral (Rosario, Córdoba, Buenos Aires).
-
-> ⚠️ *Este proyecto se encuentra en desarrollo activo.*
+MTRL es una aplicación web desarrollada con **FastAPI** que permite manejar presupuestos de forma segura mediante autenticación con **Firebase**. Está pensada como base para un sistema moderno de presupuestado en arquitectura o construcción.
 
 ---
 
-## 🚀 Características principales
+## 🛠️ Tecnologías utilizadas
 
-- Generación de presupuestos por ítem, rubro y región
-- Cálculo automático con base de datos precargada
-- Exportación a Excel y PDF
-- Interfaz moderna (Tailwind)
-- Panel interactivo con tabla editable
-- Autenticación segura (FastAPI Users)
-- Login tradicional + preparado para login social (Google, GitHub, etc.)
+- **FastAPI** – Backend moderno y rápido
+- **Firebase Authentication** – Login de usuarios con Google u otros métodos
+- **Firebase Admin SDK** – Verificación de tokens en el backend
+- **Jinja2** – Motor de plantillas para HTML
+- **HTML + Tailwind CSS** – Interfaz simple y personalizable
 
 ---
 
-## ⚙️ Tecnologías utilizadas
+## 🚀 Funcionalidades
 
-- **Python 3.10**
-- **FastAPI**
-- **SQLAlchemy**
-- **Jinja2 + Tailwind CSS**
-- **FastAPI Users** (gestión de usuarios)
-- **Uvicorn** (ASGI server)
-- **SQLite** (modo local, lista para migrar)
-- **python-dotenv** (manejo de secretos)
-- **Docker-ready** (opcional)
+- 🔒 Login seguro usando Firebase (Google Auth y más)
+- 🔐 Protección de páginas (como `/presupuestos`) solo para usuarios autenticados
+- 🧪 Middleware que valida el token JWT con Firebase
+- ⚙️ Carga de variables de entorno desde `.env`
 
 ---
 
-## 🧑‍💻 Instalación local
+## 📁 Estructura de carpetas
 
-1. Cloná el repositorio:
+MTRL/
+├── backend/
+│ ├── main.py # App principal
+│ └── firebase_credentials.json
+├── static/ # Archivos CSS, JS
+├── templates/
+│ ├── login.html # Página de login
+│ └── presupuestos.html # Página protegida
+├── .env # Variables de entorno
+└── requirements.txt # Dependencias
+
+
+---
+
+## 🔐 Configuración
+
+1. **Clona el repositorio:**
 ```bash
-git clone https://github.com/JullierJoaquin/CRRLN.git
-cd CRRLN
+git clone https://github.com/JullierJoaquin/MTRL.git
+cd MTRL
 ```
 
-2. Activá un entorno virtual:
+2. Agrega tus credenciales de Firebase:
+
+    Descarga tu archivo JSON desde Firebase Console
+    Guárdalo en backend/firebase_credentials.json
+    
+
+3. Crea un archivo .env:
 ```bash
-python -m venv venv
-source venv/bin/activate  # en Windows: venv\Scripts\activate
+SECRET_KEY=clave_super_segura_generada
+FIREBASE_CREDENTIALS=backend/firebase_credentials.json
 ```
 
-3. Instalá las dependencias:
+4. Instala las dependencias:
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Configurá las variables de entorno en un archivo `.env`:
-```env
-CRRLN_SECRET=tu_clave_segura
-```
 
-5. Ejecutá el servidor:
+5. Inicia el servidor:
 ```bash
 uvicorn backend.main:app --reload
 ```
 
-6. Accedé en tu navegador:
-```
-http://127.0.0.1:8000
-```
 
----
-
-## 🔐 Autenticación
-
-- Registro: `/auth/register`
-- Login JWT: `/auth/jwt/login`
 - Panel de usuarios: `/users/me`
 
 Próximamente:
-- Login con Google / GitHub
 - Recuperación de contraseña
 - Control de sesiones
-
----
-
-## 📁 Estructura del proyecto
-
-```
-CRRLN/
-├── backend/
-│   ├── main.py
-│   ├── db/
-│   ├── users/
-│   ├── templates/
-│   └── static/
-├── .env
-├── .gitignore
-├── requirements.txt
-└── README.md
-```
-
----
-
-## 📈 Roadmap
-
-- [x] Interfaz básica de presupuestos
-- [x] Sistema de usuarios con login seguro
-- [ ] Login con Google y redes sociales
-- [ ] Dashboard personal con historial
-- [ ] Alerta de cambios en precios
-- [ ] Modo offline y exportación sin conexión
-- [ ] Sistema de versión de presupuestos
+- Soporte para guardar presupuestos
+- Registro de nuevos usuarios en base de datos
+- Exportación de reportes a PDF / Excel
+- Panel de administración
 
 ---
 
 ## 🤝 Licencia
 
 Este proyecto está bajo licencia MIT. Libre para usar y modificar con atribución.
-
----
-
-## 👨‍💻 Autor
-
-Desarrollado por [Joaquín Jullier](https://github.com/JullierJoaquin) — estudiante de arquitectura y programador autodidacta apasionado por la integración entre tecnología, diseño y datos.
 
 ---
 

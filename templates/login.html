@@ -1,51 +1,106 @@
 <!DOCTYPE html>
+<!---Coding By CoderGirl | www.codinglabweb.com--->
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Login con Firebase</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
-</head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
 
-  <div class="bg-white p-8 rounded shadow-md w-full max-w-sm text-center">
-    <img src="/static/images/logo.png" alt="Logo" class="w-32 mx-auto mb-6">
-    <button id="login-btn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-      Iniciar sesión
-    </button>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Iniciar sesion</title>
+
+  <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/static/css/login.css">
+  
+  <script type="module" src="/static/js/login-handler.js" defer></script>
+
+</head>
+
+<body>
+  <div class="container">
+    <input type="checkbox" id="check">
+    <div class="login form">
+      <header>Iniciar sesion</header>
+      <form action="#">
+        <input type="text" placeholder="Email">
+        <input type="password" placeholder="Contraseña">
+        <a href="#">Olvidaste tu contraseña?</a>
+        <input type="button" class="button" value="Ingresar">
+      </form>
+      <div class="signup">
+        <span class="signup">No tienes una cuenta?
+         <label for="check">Registrarse</label>
+        </span>
+      </div>
+    </div>
+    <div class="registration form">
+      <header>Registrarse</header>
+      <form id="register-form">
+        <input type="text" placeholder="Email">
+        <input type="password" id="register-pass1" placeholder="Contraseña">
+        <input type="password" id="register-pass2" placeholder="Confirmar contraseña">
+        <input type="button" class="button" value="Registrarse">
+      </form>
+      <div class="signup">
+        <span class="signup">Ya tienes una cuenta?
+         <label for="check">Iniciar sesion</label>
+        </span>
+      </div>
+    </div>
   </div>
 
   <script>
-    // Configuración de Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyDdhhOgNNR6g90tuLO5AhR3sL4S-d_OM0Q",
-      authDomain: "mtrl-fb9da.firebaseapp.com",
-      projectId: "mtrl-fb9da",
-      storageBucket: "mtrl-fb9da.appspot.com",
-      messagingSenderId: "866092445579",
-      appId: "1:866092445579:web:f2ef6ca33393978f6f498e",
-      measurementId: "G-MDLK1ECZPM"
+    window.onload = () => {
+      const mostrarRegistro = localStorage.getItem('mostrarRegistro');
+      if (mostrarRegistro === 'true') {
+        document.getElementById('check').checked = true;
+      }
+      // Limpia el valor para no persistir entre visitas
+      localStorage.removeItem('mostrarRegistro');
     };
+  </script>
 
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+  <script type="module">
+    import { auth } from "/static/js/firebase-config.js";
+    import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-    document.getElementById("login-btn").addEventListener("click", () => {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider)
-        .then(result => {
-          return result.user.getIdToken();
+    const registerBtn = document.querySelector('.registration .button');
+    const loginBtn = document.querySelector('.login .button');
+
+    // REGISTRO
+    registerBtn.addEventListener('click', () => {
+      const email = document.querySelector('.registration input[type="text"]').value;
+      const password = document.querySelector('.registration input[type="password"]').value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert("Usuario registrado correctamente");
+          console.log(userCredential.user);
         })
-        .then(token => {
-          document.cookie = `firebase_token=${token}; path=/`;
-          window.location.href = "/presupuestos";
+        .catch((error) => {
+          alert(error.message);
+          console.error(error);
+        });
+    });
+
+    // LOGIN
+    loginBtn.addEventListener('click', () => {
+      const email = document.querySelector('.login input[type="text"]').value;
+      const password = document.querySelector('.login input[type="password"]').value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert("Login exitoso");
+          console.log(userCredential.user);
+          window.location.href = "/dashboard"; // Redirige a otra página
         })
-        .catch(error => {
-          console.error("❌ Error al iniciar sesión:", error);
-          alert("Hubo un error al iniciar sesión.");
+        .catch((error) => {
+          alert(error.message);
+          console.error(error);
         });
     });
   </script>
+<script src="/static/js/presupuestos.js"></script>
 </body>
 </html>
+

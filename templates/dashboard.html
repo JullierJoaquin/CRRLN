@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>MTLR. Presupuestos.</title>
+  <meta charset="UTF-8">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+</head>
+
+<body class="bg-gray-100 min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-[#202F3C] text-white flex flex-col justify-between p-5 min-h-screen">
+
+  <!-- Logo institucional -->
+  <div class="mb-4">
+    <img src="/static/images/logoteca.png" alt="Logo"
+        class="w-full h-[64px] object-contain" />
+  </div>
+
+  <!-- Encabezado de usuario -->
+  <div class="flex items-center space-x-4 mb-6">
+    <img id="user-photo" src="/static/images/default_avatar.png" alt="Avatar"
+        class="w-12 h-12 rounded-full object-cover border-2">
+    <h1 id="user-name" class="text-sm font-semibold text-white">Cargando usuario...</h1>
+  </div>
+
+
+    <!-- Navegación principal -->
+    <nav class="flex flex-col space-y-4">
+      <a href="/" class="hover:underline">Inicio</a>
+      <a href="/presupuestos" class="hover:underline">Presupuestos</a>
+      <a href="#" class="hover:underline">Contacto</a>
+    </nav>
+
+  <!-- Pie de sidebar -->
+  <div class="flex flex-col space-y-4 mt-auto">
+
+    <button onclick="logout()"
+      class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-semibold">
+      Cerrar sesión
+    </button>
+  </div>
+
+  </aside>
+
+  <!-- Main content -->
+  <main class="flex-1 flex flex-col space-y-0">
+
+    <!-- Contenedor dividido -->
+    <div class="flex w-full h-full">
+
+    <!-- Tabla completa ocupando toda la altura -->
+    <div class="w-3/4 h-full overflow-auto">
+      <table class="table-auto w-full h-full text-center border-collapse">
+        <thead class="bg-[#FFB72D] text-black text-sm uppercase sticky top-0 z-20 border-none">
+          <tr class="m-0 border-none">
+            <th class="px-4 py-2 h-16">Material</th>
+            <th class="px-4 py-2 h-16">Unidad</th>
+            <th class="px-4 py-2 h-16">Precio Unitario</th>
+            <th class="px-4 py-2 h-16">Cantidad</th>
+            <th class="px-4 py-2 h-16">Subtotal</th>
+            <th class="px-4 py-2 h-16">Acción</th>
+          </tr>
+        </thead>
+
+        <tbody id="tabla-materiales" class="align-top">
+          <!-- Filas se agregan dinámicamente -->
+        </tbody>
+
+        <tfoot class="sticky bottom-0 bg-white border-t">
+          <tr class="bg-gray-50 text-center">
+            
+            <!-- Material -->
+            <td class="px-4 py-2 relative">
+              <input id="nuevo-material" type="text" placeholder="Ej: Cemento"
+                    class="p-2 border rounded w-full text-center" autocomplete="off">
+              <ul id="sugerencias" class="absolute z-10 bg-white border rounded bottom-full mb-1 w-full shadow max-h-40 overflow-y-auto hidden text-left text-sm">
+                <!-- sugerencias aquí -->
+              </ul>
+            </td>
+
+            <!-- Unidad -->
+            <td class="px-4 py-2 unidad">-</td>
+
+            <!-- Precio Unitario -->
+            <td class="px-4 py-2 precio">-</td>
+
+            <!-- Cantidad -->
+            <td class="px-4 py-2">—</td>
+
+            <!-- Subtotal -->
+            <td class="px-4 py-2">—</td>
+
+            <!-- Botón de agregar -->
+            <td class="px-4 py-2">
+              <button onclick="agregarMaterial()"
+                class="bg-[#FFB72D] hover:bg-yellow-400 text-white px-4 py-2 rounded shadow font-bold text-lg">
+                +
+              </button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+      <!-- Sección secundaria: Espacio adicional (1/4) -->
+      <div class="w-1/4 h-full bg-gray-200 rounded-lg p-6">
+      </div>
+
+    </div>
+
+  </main>
+
+<script type="module" src="/static/js/presupuestos.js"></script>
+</body>
+</html>

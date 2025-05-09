@@ -1,3 +1,4 @@
+
 console.log("✅ presupuestos.js cargado correctamente");
 
 let chartDistribucion = null;

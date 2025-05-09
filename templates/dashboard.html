@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
   <title>MTLR. Presupuestos.</title>
   <meta charset="UTF-8">
+
   <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="/static/js/presupuestos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+
 </head>
 
 <body class="bg-gray-100 min-h-screen flex">
@@ -18,12 +24,7 @@
         class="w-full h-[64px] object-contain" />
   </div>
 
-  <!-- Encabezado de usuario -->
-  <div class="flex items-center space-x-4 mb-6">
-    <img id="user-photo" src="/static/images/default_avatar.png" alt="Avatar"
-        class="w-12 h-12 rounded-full object-cover border-2">
-    <h1 id="user-name" class="text-sm font-semibold text-white">Cargando usuario...</h1>
-  </div>
+
 
 
     <!-- Navegación principal -->
@@ -36,10 +37,12 @@
   <!-- Pie de sidebar -->
   <div class="flex flex-col space-y-4 mt-auto">
 
-    <button onclick="logout()"
-      class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-semibold">
-      Cerrar sesión
-    </button>
+      <!-- Encabezado de usuario -->
+    <div class="flex items-center space-x-4 mb-6">
+      <img id="user-photo" src="/static/images/default_avatar.png" alt="Avatar"
+          class="w-12 h-12 rounded-full object-cover border-2">
+      <h1 id="user-name" class="text-sm font-semibold text-white">Cargando usuario...</h1>
+    </div>
   </div>
 
   </aside>
@@ -104,14 +107,33 @@
       </table>
     </div>
 
-      <!-- Sección secundaria: Espacio adicional (1/4) -->
-      <div class="w-1/4 h-full bg-gray-200 rounded-lg p-6">
-      </div>
+  <!-- Sección secundaria: Espacio adicional (1/4) -->
+  <div class="w-1/4 bg-gray-200 rounded-lg p-6 flex flex-col space-y-4 relative min-h-[500px]">
 
+    <h2 class="text-xl font-semibold">Resumen visual</h2>
+    <p class="text-gray-700 text-sm">Visualizá la distribución de costos de tu presupuesto.</p>
+
+    <!-- Gráfico de torta -->
+    <div class="mt-4">
+      <h3 class="text-sm font-semibold mb-1">Distribución (Chart.js)</h3>
+      <canvas id="graficoChartJS" width="250" height="250"></canvas>
     </div>
 
-  </main>
+    <!-- Gráfico de barras (Top 75) -->
+    <div class="mt-4">
+      <h3 class="text-sm font-semibold mb-1">Top 7 materiales más costosos</h3>
+      <canvas id="graficoTop7ChartJS" width="250" height="250"></canvas>
+    </div>
 
-<script type="module" src="/static/js/presupuestos.js"></script>
+    <!-- Botón fijo al fondo derecho -->
+    <div class="absolute bottom-4 left-6 right-6">
+      <button onclick="renderizarGraficos(); renderizarTop7();"
+              class="w-full bg-[#FFB72D] hover:bg-yellow-400 text-black px-4 py-3 rounded-lg font-semibold shadow-md">
+        Recalcular
+      </button>
+    </div>
+
+
+
 </body>
 </html>

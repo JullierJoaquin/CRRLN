@@ -1,94 +1,83 @@
-# MTRL 🔐📐
 
-MTRL es una aplicación web desarrollada con **FastAPI** que permite manejar presupuestos de forma segura mediante autenticación con **Firebase**. Está pensada como base para un sistema moderno de presupuestado en arquitectura o construcción.
+# MTRL Web Service App
 
----
-
-## 🛠️ Tecnologías utilizadas
-
-- **FastAPI** – Backend moderno y rápido
-- **Firebase Authentication** – Login de usuarios con Google u otros métodos
-- **Firebase Admin SDK** – Verificación de tokens en el backend
-- **Jinja2** – Motor de plantillas para HTML
-- **HTML + Tailwind CSS** – Interfaz simple y personalizable
+Una aplicación web desarrollada para gestionar presupuestos de materiales de construcción, con autenticación de usuarios mediante Firebase, visualización interactiva de datos y diseño moderno utilizando Tailwind CSS.
 
 ---
 
-## 🚀 Funcionalidades
+## 🚀 Características principales
 
-- 🔒 Login seguro usando Firebase (Google Auth y más)
-- 🔐 Protección de páginas (como `/presupuestos`) solo para usuarios autenticados
-- 🧪 Middleware que valida el token JWT con Firebase
-- ⚙️ Carga de variables de entorno desde `.env`
-
----
-
-## 📁 Estructura de carpetas
-
-MTRL/
-├── backend/
-│ ├── main.py # App principal
-│ └── firebase_credentials.json
-├── static/ # Archivos CSS, JS
-├── templates/
-│ ├── login.html # Página de login
-│ └── presupuestos.html # Página protegida
-├── .env # Variables de entorno
-└── requirements.txt # Dependencias
-
+- 🔐 **Autenticación de usuarios** con Firebase (login/registro/logout)
+- 🧱 **Carga dinámica de materiales** con autocompletado inteligente
+- 📊 **Visualización de presupuesto** con gráficos interactivos (Chart.js y Plotly)
+- 💾 **Guardado automático** de presupuestos por usuario en Firestore
+- 🎨 Estética basada en paleta de colores inspirada en Van Gogh
 
 ---
 
-## 🔐 Configuración
+## 🧪 Tecnologías utilizadas
 
-1. **Clona el repositorio:**
+- **Frontend:** HTML, Tailwind CSS, JavaScript (modular)
+- **Gráficos:** [Chart.js](https://www.chartjs.org/), [Plotly.js](https://plotly.com/javascript/)
+- **Backend (Auth/DB):** Firebase Authentication + Firestore
+
+---
+
+## ⚙️ Instalación y ejecución
+
+1. Cloná este repositorio:
+
 ```bash
-git clone https://github.com/JullierJoaquin/MTRL.git
-cd MTRL
+git clone https://github.com/tu-usuario/MTRL_web_service_app.git
+cd MTRL_web_service_app
 ```
 
-2. Agrega tus credenciales de Firebase:
+2. Serví el frontend con tu herramienta preferida:
 
-    Descarga tu archivo JSON desde Firebase Console
-    Guárdalo en backend/firebase_credentials.json
-    
+- Usando Python (por ejemplo con Flask o FastAPI)
+- Servidor local simple:
 
-3. Crea un archivo .env:
 ```bash
-SECRET_KEY=clave_super_segura_generada
-FIREBASE_CREDENTIALS=backend/firebase_credentials.json
+python3 -m http.server
 ```
 
-4. Instala las dependencias:
-```bash
-pip install -r requirements.txt
-```
-
-
-5. Inicia el servidor:
-```bash
-uvicorn backend.main:app --reload
-```
-
-
-- Panel de usuarios: `/users/me`
-
-Próximamente:
-- Recuperación de contraseña
-- Control de sesiones
-- Soporte para guardar presupuestos
-- Registro de nuevos usuarios en base de datos
-- Exportación de reportes a PDF / Excel
-- Panel de administración
+3. Configurá tu archivo `firebase-config.js` con las claves de tu proyecto Firebase.
 
 ---
 
-## 🤝 Licencia
+## 📁 Estructura del proyecto
 
-Este proyecto está bajo licencia MIT. Libre para usar y modificar con atribución.
+```
+/static/
+  ├── js/
+  │    ├── presupuestos.js
+  │    └── firebase-config.js
+  ├── css/
+  │    └── login.css
+  └── images/
+       └── logoteca.png, default_avatar.png
+
+/templates/
+  ├── dashboard.html
+  └── login.html
+
+main.py (si usás un backend como FastAPI)
+```
 
 ---
 
-## 📬 ¿Sugerencias o ideas?
+## 📊 Capturas
 
-¡Abrí un issue o escribime! Toda colaboración es bienvenida.
+![Dashboard](./screenshots/dashboard.png)
+
+---
+
+## 📬 Contribuciones
+
+¡Toda mejora o sugerencia es bienvenida! Podés abrir un issue o un pull request.
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia MIT.

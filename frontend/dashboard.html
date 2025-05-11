@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>MTLR. Presupuestos.</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+</head>
+
+<body class="bg-gray-100 min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 min-w-[256px] max-w-[256px] bg-[#202F3C] text-white flex flex-col justify-between p-5 min-h-screen overflow-hidden">
+
+
+    <!-- Encabezado de usuario -->
+    <div class="mb-6">
+      <div class="flex items-center space-x-4">
+        <img id="user-photo" src="/static/images/default_avatar.png" alt="Avatar"
+            class="w-12 h-12 rounded-full object-cover border-2">
+        <h1 id="user-name" class="text-sm font-semibold text-white truncate max-w-[180px]">
+          Cargando usuario...
+        </h1>
+      </div>
+    </div>
+
+    <!-- Navegación principal -->
+    <nav class="flex flex-col space-y-4">
+      <button onclick="mostrarSeccion('presupuestos')" class="text-left hover:underline">Presupuestos</button>
+      <button onclick="mostrarSeccion('materiales')" class="text-left hover:underline">Materiales</button>
+    </nav>
+
+    <!-- Pie del sidebar con logo + logout -->
+    <div class="mt-auto flex flex-col space-y-4">
+      
+
+      <img src="/static/images/logoteca.png" alt="Logo"
+          class="w-full h-20 object-contain opacity-70" />
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="flex-1 flex flex-col h-screen overflow-hidden">
+    <div class="flex w-full h-full">
+      <!-- Tabla de materiales -->
+      <div class="w-3/4 flex flex-col h-full">
+        
+        <!-- Scroll solo en la tabla -->
+        <div class="flex-1 overflow-auto">
+          <table class="table-auto w-full text-center border-collapse">
+            <thead class="bg-[#FFB72D] text-black text-sm uppercase sticky top-0 z-20 border-none">
+              <tr class="m-0 border-none">
+                <th class="px-4 py-2 h-16">Material</th>
+                <th class="px-4 py-2 h-16">Unidad</th>
+                <th class="px-4 py-2 h-16">Precio Unitario</th>
+                <th class="px-4 py-2 h-16">Cantidad</th>
+                <th class="px-4 py-2 h-16">Subtotal</th>
+                <th class="px-4 py-2 h-16">Acción</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-materiales" class="align-top">
+              <!-- Filas dinámicas -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Formulario de carga fijo abajo -->
+        <div class="grid grid-cols-6 gap-2 px-4 py-3 bg-white border-t border-gray-200 shadow">
+          <div class="col-span-1 relative">
+            <input id="nuevo-material" type="text" placeholder="Ej: Cemento"
+                  class="p-2 border rounded w-full text-center" autocomplete="off">
+            <ul id="sugerencias"
+                class="absolute z-10 bg-white border rounded bottom-full mb-1 w-full shadow max-h-40 overflow-y-auto hidden text-left text-sm">
+            </ul>
+          </div>
+          <div class="col-span-1 unidad flex items-center justify-center">—</div>
+          <div class="col-span-1 precio flex items-center justify-center">—</div>
+          <div class="col-span-1 flex items-center justify-center">—</div>
+          <div class="col-span-1 flex items-center justify-center">—</div>
+          <div class="col-span-1">
+            <button onclick="agregarMaterial()"
+                    class="bg-[#FFB72D] hover:bg-[#e6a523] text-white px-4 py-2 rounded shadow font-bold text-lg w-full">
+              +
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Resumen visual -->
+      <div class="w-1/4 bg-gray-200 rounded-lg p-6 flex flex-col space-y-4 relative min-h-[500px]">
+        <h2 class="text-xl font-semibold">Resumen visual</h2>
+        
+
+        <div class="mt-4">
+          <h3 class="text-sm font-semibold mb-1">Distribución</h3>
+          <canvas id="graficoChartJS" width="250" height="250"></canvas>
+        </div>
+
+        <div class="mt-4">
+          <h3 class="text-sm font-semibold mb-1">Top 7 materiales más costosos</h3>
+          <canvas id="graficoTop7ChartJS" width="250" height="250"></canvas>
+        </div>
+
+        <div class="absolute bottom-4 left-6 right-6">
+          <button onclick="renderizarGraficos(); renderizarTop7();"
+                  class="w-full bg-[#FFB72D] hover:bg-[#e6a523] text-black px-4 py-3 rounded-lg font-semibold shadow-md">
+            Recalcular
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Vista de consulta de materiales -->
+  <div id="seccion-materiales" class="hidden w-full p-6 overflow-auto">
+
+    <h2 class="text-xl font-bold mb-4">Base de materiales</h2>
+
+    <input type="text" id="buscador-materiales" placeholder="Buscar por descripción o código..."
+          class="w-full p-3 mb-4 border rounded shadow text-gray-700">
+
+    <div class="overflow-x-auto bg-white rounded-lg shadow">
+      <table class="min-w-full table-auto text-sm text-left">
+        <thead class="bg-[#FFB72D] text-black uppercase sticky top-0">
+          <tr>
+            <th class="px-4 py-2">Código</th>
+            <th class="px-4 py-2">Descripción</th>
+            <th class="px-4 py-2">Unidad</th>
+            <th class="px-4 py-2">Costo Total</th>
+            <th class="px-4 py-2">Rubro</th>
+            <th class="px-4 py-2">Fecha</th>
+            <th class="px-4 py-2">Fuente</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-materiales" class="divide-y">
+          <!-- Contenido dinámico -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="/static/js/presupuestos.js"></script>
+  <script src="/static/js/materiales.js"></script>
+  <script type="module" src="/static/js/materiales.js"></script>
+
+
+</body>
+</html>

@@ -123,7 +123,7 @@
     <input type="text" id="buscador-materiales" placeholder="Buscar por descripción o código..."
           class="w-full p-3 mb-4 border rounded shadow text-gray-700">
 
-    <div class="overflow-x-auto bg-white rounded-lg shadow">
+    <div class="overflow-x-auto bg-white rounded-lg shadow max-h-[calc(100vh-200px)] overflow-y-auto">
       <table class="min-w-full table-auto text-sm text-left">
         <thead class="bg-[#FFB72D] text-black uppercase sticky top-0">
           <tr>
@@ -136,7 +136,7 @@
             <th class="px-4 py-2">Fuente</th>
           </tr>
         </thead>
-        <tbody id="tabla-materiales" class="divide-y">
+        <tbody id="tabla-materiales-base" class="divide-y">
           <!-- Contenido dinámico -->
         </tbody>
       </table>
@@ -148,6 +148,21 @@
   <script type="module" src="/static/js/presupuestos.js"></script>
   <script src="/static/js/materiales.js"></script>
   <script type="module" src="/static/js/materiales.js"></script>
+  <script>
+    function mostrarSeccion(seccion) {
+      // Ocultar todas las secciones
+      document.querySelectorAll("main > div, #seccion-materiales").forEach(div => {
+        div.classList.add("hidden");
+      });
+
+      // Mostrar la sección deseada
+      if (seccion === "materiales") {
+        document.getElementById("seccion-materiales").classList.remove("hidden");
+      }
+    }
+  </script>
+
+  
 
 
 </body>

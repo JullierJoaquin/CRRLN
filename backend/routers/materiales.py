@@ -6,7 +6,7 @@ from backend.models.rubro import Rubro
 
 router = APIRouter()
 
-@router.get("/api/materiales_completo")
+@router.get("/materiales_completo")
 def get_materiales(session: Session = Depends(get_session)):
     stmt = select(Material, Rubro.nombre).join(Rubro, Material.rubro_id == Rubro.id, isouter=True)
     results = session.exec(stmt).all()
@@ -16,7 +16,7 @@ def get_materiales(session: Session = Depends(get_session)):
             "descripcion": m.descripcion,
             "unidad": m.unidad,
             "costo_total": m.costo_total,
-            "rubro_nombre": rubro,
+            "rubro": rubro,
             "fecha": m.fecha.isoformat() if m.fecha else None,
             "fuente": m.fuente
         }
